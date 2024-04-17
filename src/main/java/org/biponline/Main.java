@@ -1,9 +1,17 @@
 package org.biponline;
+
+
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello and welcome!");
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
-        }
+        ArrayList list = new ArrayList<>();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+
     }
+
 }
