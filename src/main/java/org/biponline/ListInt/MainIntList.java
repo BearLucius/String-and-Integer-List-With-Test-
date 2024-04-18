@@ -1,11 +1,10 @@
-package org.biponline;
+package org.biponline.ListInt;
 
-import org.biponline.List.MyIntegerArrayList;
 import java.util.Arrays;
 public class MainIntList {
 
     public static void main(String[] args) {
-        MyIntegerArrayList list = new MyIntegerArrayList(3);
+        MyIntegerArraISKList list = new MyIntegerArraISKList(3);
         // Testing add(Integer item) method
 
         list.add(1);

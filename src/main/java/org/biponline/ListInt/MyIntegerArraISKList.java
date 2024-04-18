@@ -1,31 +1,36 @@
-package org.biponline.List;
+package org.biponline.ListInt;
 
-import org.biponline.interfacce.StringList;
+import org.biponline.interfacce.IntegerList;
 
-public class MyStringArrayList implements StringList {
-    private String[] array;
+import java.util.Arrays;
+
+public class MyIntegerArraISKList implements IntegerList {
+    public Integer[] array;
     private int size;
-    public MyStringArrayList (int capacity) {
+
+    public MyIntegerArraISKList(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Емкость должна быть больше 0.");
         }
-        this.array = new String[capacity];
+        this.array = new Integer[capacity];
+
         this.size = 0;
     }
     @Override
-    public String add(String item) {
+    public Integer add(Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
+
         }
         if (size == array.length) {
-            throw new ArrayIndexOutOfBoundsException("Массив заполнен, невозможно добавить больше элементов");
+            grow();
         }
         array[size] = item;
         size++;
         return item;
     }
     @Override
-    public String add(int index, String item) {
+    public Integer add(int index, Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
         }
@@ -33,7 +38,7 @@ public class MyStringArrayList implements StringList {
             throw new ArrayIndexOutOfBoundsException("Индекс выходит за пределы");
         }
         if (size == array.length) {
-            throw new ArrayIndexOutOfBoundsException("Массив заполнен, невозможно добавить больше элементов");
+            grow();
         }
         for (int i = size; i > index; i--) {
             array[i] = array[i - 1];
@@ -43,19 +48,19 @@ public class MyStringArrayList implements StringList {
         return item;
     }
     @Override
-    public String set(int index, String item) {
+    public Integer set(int index, Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
         }
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Индекс выходит за пределы");
         }
-        String replacedItem = array[index];
+        Integer replacedItem = array[index];
         array[index] = item;
         return replacedItem;
     }
     @Override
-    public String remove(String item) {
+    public Integer remove(Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
         }
@@ -64,6 +69,7 @@ public class MyStringArrayList implements StringList {
                 for (int j = i; j < size - 1; j++) {
                     array[j] = array[j + 1];
                 }
+
                 array[size - 1] = null;
                 size--;
                 return item;
@@ -72,11 +78,11 @@ public class MyStringArrayList implements StringList {
         throw new IllegalArgumentException("Элемент не найден в списке");
     }
     @Override
-    public String remove(int index) {
+    public Integer remove(int index) {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Индекс выходит за пределы");
         }
-        String removedItem = array[index];
+        Integer removedItem = array[index];
         for (int i = index; i < size - 1; i++) {
             array[i] = array[i + 1];
         }
@@ -85,16 +91,17 @@ public class MyStringArrayList implements StringList {
         return removedItem;
     }
     @Override
-    public boolean contains(String item) {
+    public boolean contains(Integer item) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(item)) {
                 return true;
             }
         }
         return false;
+
     }
     @Override
-    public int indexOf(String item) {
+    public int indexOf(Integer item) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(item)) {
                 return i;
@@ -103,7 +110,7 @@ public class MyStringArrayList implements StringList {
         return -1;
     }
     @Override
-    public int lastIndexOf(String item) {
+    public int lastIndexOf(Integer item) {
         for (int i = size - 1; i >= 0; i--) {
             if (array[i].equals(item)) {
                 return i;
@@ -112,15 +119,14 @@ public class MyStringArrayList implements StringList {
         return -1;
     }
     @Override
-    public String get(int index) {
+    public Integer get(int index) {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Индекс выходит за пределы");
         }
         return array[index];
     }
-
     @Override
-    public boolean equals(StringList otherList) {
+    public boolean equals(IntegerList otherList) {
         if (otherList == null) {
             throw new IllegalArgumentException("Другой cписок не может быть нулевым");
         }
@@ -144,15 +150,59 @@ public class MyStringArrayList implements StringList {
     }
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            array[i] = null;
-        }
+        Arrays.fill(array, null);
         size = 0;
     }
+
     @Override
-    public String[] toArray() {
-        String[] newArray = new String[size];
+    public Integer[] toArray() {
+        Integer[] newArray = new Integer[size];
         System.arraycopy(array, 0, newArray, 0, size);
         return newArray;
+    }
+    private void grow() {
+        int newCapacity = (int) (array.length * 1.5);
+        array = Arrays.copyOf(array, newCapacity);
+
+    }
+    private void swapElements(int[] arr, int left, int right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+    }
+    private int partition(int[] arr, int begin, int end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+        for (int j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                swapElements(arr, i, j);
+            }
+        }
+        swapElements(arr, i + 1, end);
+        return i + 1;
+    }
+    public void quickSort(int[] arr, int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(arr, begin, end);
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+    public boolean contains(int[] arr, int element) {
+        int min = 0;
+        int max = arr.length - 1;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            if (element == arr[mid]) {
+                return true;
+            }
+            if (element < arr[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
     }
 }

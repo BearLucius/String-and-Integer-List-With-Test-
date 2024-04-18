@@ -1,4 +1,4 @@
-package org.biponline.List;
+package org.biponline.ListInt;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyIntegerArrayListTest {
-        private MyIntegerArrayList list;
+        private MyIntegerArraISKList list;
         @BeforeEach
         public void setUp() {
-            list = new MyIntegerArrayList(7);
+            list = new MyIntegerArraISKList(7);
             list.add(1);
             list.add(2);
             list.add(3);
@@ -57,7 +57,7 @@ class MyIntegerArrayListTest {
         }
         @Test
         public void testListWithAnotherList() {
-            MyIntegerArrayList otherList = new MyIntegerArrayList(5);
+            MyIntegerArraISKList otherList = new MyIntegerArraISKList(5);
             otherList.add(3);
             otherList.add(5);
             otherList.add(6);
@@ -72,7 +72,7 @@ class MyIntegerArrayListTest {
         @Test
         public void testIfListIsEmpty() {
             assertFalse(list.isEmpty());
-            MyIntegerArrayList emptyList = new MyIntegerArrayList(5);
+            MyIntegerArraISKList emptyList = new MyIntegerArraISKList(5);
             assertTrue(emptyList.isEmpty());
         }
         @Test
