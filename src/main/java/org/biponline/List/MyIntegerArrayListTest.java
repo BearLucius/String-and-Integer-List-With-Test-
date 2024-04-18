@@ -69,7 +69,6 @@ class MyIntegerArrayListTest {
 
             assertFalse(list.equals(otherList));
         }
-
         @Test
         public void testIfListIsEmpty() {
             assertFalse(list.isEmpty());

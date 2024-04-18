@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 public class MyIntegerArrayList implements IntegerList {
     public Integer[] array;
-
     private int size;
 
     public MyIntegerArrayList(int capacity) {
@@ -18,7 +17,6 @@ public class MyIntegerArrayList implements IntegerList {
 
         this.size = 0;
     }
-
     @Override
     public Integer add(Integer item) {
         if (item == null) {
@@ -31,10 +29,7 @@ public class MyIntegerArrayList implements IntegerList {
         array[size] = item;
         size++;
         return item;
-
     }
-
-
     @Override
     public Integer add(int index, Integer item) {
         if (item == null) {
@@ -52,9 +47,7 @@ public class MyIntegerArrayList implements IntegerList {
         array[index] = item;
         size++;
         return item;
-
     }
-
     @Override
     public Integer set(int index, Integer item) {
         if (item == null) {
@@ -67,7 +60,6 @@ public class MyIntegerArrayList implements IntegerList {
         array[index] = item;
         return replacedItem;
     }
-
     @Override
     public Integer remove(Integer item) {
         if (item == null) {
@@ -86,7 +78,6 @@ public class MyIntegerArrayList implements IntegerList {
         }
         throw new IllegalArgumentException("Элемент не найден в списке");
     }
-
     @Override
     public Integer remove(int index) {
         if (index < 0 || index >= size) {
@@ -99,9 +90,7 @@ public class MyIntegerArrayList implements IntegerList {
         array[size - 1] = null;
         size--;
         return removedItem;
-
     }
-
     @Override
     public boolean contains(Integer item) {
         for (int i = 0; i < size; i++) {
@@ -112,7 +101,6 @@ public class MyIntegerArrayList implements IntegerList {
         return false;
 
     }
-
     @Override
     public int indexOf(Integer item) {
         for (int i = 0; i < size; i++) {
@@ -122,7 +110,6 @@ public class MyIntegerArrayList implements IntegerList {
         }
         return -1;
     }
-
     @Override
     public int lastIndexOf(Integer item) {
         for (int i = size - 1; i >= 0; i--) {
@@ -132,7 +119,6 @@ public class MyIntegerArrayList implements IntegerList {
         }
         return -1;
     }
-
     @Override
     public Integer get(int index) {
         if (index < 0 || index >= size) {
@@ -140,7 +126,6 @@ public class MyIntegerArrayList implements IntegerList {
         }
         return array[index];
     }
-
     @Override
     public boolean equals(IntegerList otherList) {
         if (otherList == null) {
@@ -156,23 +141,18 @@ public class MyIntegerArrayList implements IntegerList {
         }
         return true;
     }
-
     @Override
     public int size() {
         return size;
     }
-
     @Override
     public boolean isEmpty() {
         return size == 0;
-
     }
-
     @Override
     public void clear() {
         Arrays.fill(array, null);
         size = 0;
-
     }
 
     @Override
@@ -186,14 +166,11 @@ public class MyIntegerArrayList implements IntegerList {
         array = Arrays.copyOf(array, newCapacity);
 
     }
-
-
     private void swapElements(int[] arr, int left, int right) {
         int temp = arr[left];
         arr[left] = arr[right];
         arr[right] = temp;
     }
-
     private int partition(int[] arr, int begin, int end) {
         int pivot = arr[end];
         int i = (begin - 1);
@@ -206,7 +183,6 @@ public class MyIntegerArrayList implements IntegerList {
         swapElements(arr, i + 1, end);
         return i + 1;
     }
-
     public void quickSort(int[] arr, int begin, int end) {
         if (begin < end) {
             int partitionIndex = partition(arr, begin, end);

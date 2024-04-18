@@ -5,7 +5,6 @@ import org.biponline.interfacce.StringList;
 public class MyStringArrayList implements StringList {
     private String[] array;
     private int size;
-
     public MyStringArrayList (int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Емкость должна быть больше 0.");
@@ -13,7 +12,6 @@ public class MyStringArrayList implements StringList {
         this.array = new String[capacity];
         this.size = 0;
     }
-
     @Override
     public String add(String item) {
         if (item == null) {
@@ -26,7 +24,6 @@ public class MyStringArrayList implements StringList {
         size++;
         return item;
     }
-
     @Override
     public String add(int index, String item) {
         if (item == null) {
@@ -45,7 +42,6 @@ public class MyStringArrayList implements StringList {
         size++;
         return item;
     }
-
     @Override
     public String set(int index, String item) {
         if (item == null) {
@@ -58,7 +54,6 @@ public class MyStringArrayList implements StringList {
         array[index] = item;
         return replacedItem;
     }
-
     @Override
     public String remove(String item) {
         if (item == null) {
@@ -76,7 +71,6 @@ public class MyStringArrayList implements StringList {
         }
         throw new IllegalArgumentException("Элемент не найден в списке");
     }
-
     @Override
     public String remove(int index) {
         if (index < 0 || index >= size) {
@@ -90,7 +84,6 @@ public class MyStringArrayList implements StringList {
         size--;
         return removedItem;
     }
-
     @Override
     public boolean contains(String item) {
         for (int i = 0; i < size; i++) {
@@ -100,7 +93,6 @@ public class MyStringArrayList implements StringList {
         }
         return false;
     }
-
     @Override
     public int indexOf(String item) {
         for (int i = 0; i < size; i++) {
@@ -110,7 +102,6 @@ public class MyStringArrayList implements StringList {
         }
         return -1;
     }
-
     @Override
     public int lastIndexOf(String item) {
         for (int i = size - 1; i >= 0; i--) {
@@ -120,7 +111,6 @@ public class MyStringArrayList implements StringList {
         }
         return -1;
     }
-
     @Override
     public String get(int index) {
         if (index < 0 || index >= size) {
@@ -144,17 +134,14 @@ public class MyStringArrayList implements StringList {
         }
         return true;
     }
-
     @Override
     public int size() {
         return size;
     }
-
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
-
     @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
@@ -162,7 +149,6 @@ public class MyStringArrayList implements StringList {
         }
         size = 0;
     }
-
     @Override
     public String[] toArray() {
         String[] newArray = new String[size];
