@@ -4,11 +4,11 @@ import org.biponline.interfacce.IntegerList;
 
 import java.util.Arrays;
 
-public class MyIntegerArraISKList implements IntegerList {
+public class MyIntegerArrayISKList implements IntegerList {
     public Integer[] array;
     private int size;
 
-    public MyIntegerArraISKList(int capacity) {
+    public MyIntegerArrayISKList(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Емкость должна быть больше 0.");
         }
@@ -20,7 +20,6 @@ public class MyIntegerArraISKList implements IntegerList {
     public Integer add(Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
-
         }
         if (size == array.length) {
             grow();
@@ -160,6 +159,12 @@ public class MyIntegerArraISKList implements IntegerList {
         System.arraycopy(array, 0, newArray, 0, size);
         return newArray;
     }
+
+    @Override
+    public int lastIndex(int i) {
+        return -1;
+    }
+
     private void grow() {
         int newCapacity = (int) (array.length * 1.5);
         array = Arrays.copyOf(array, newCapacity);

@@ -3,7 +3,7 @@ package org.biponline.ListString;
 import org.biponline.interfacce.StringList;
 
 public class MyStringIKSLArrayList implements StringList {
-    private String[] array;
+    String[] array;
     private int size;
     public MyStringIKSLArrayList(int capacity) {
         if (capacity <= 0) {
