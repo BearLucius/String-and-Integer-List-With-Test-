@@ -1,7 +1,4 @@
-package test;
-
 import org.biponline.ListString.MyStringIKSLArrayList;
-import org.biponline.interfacce.StringList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
