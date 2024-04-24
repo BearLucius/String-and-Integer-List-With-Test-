@@ -20,6 +20,7 @@ public class MyIntegerArrayISKList implements IntegerList {
     public Integer add(Integer item) {
         if (item == null) {
             throw new IllegalArgumentException("Элемент не может быть нулевым");
+
         }
         if (size == array.length) {
             grow();
@@ -162,7 +163,7 @@ public class MyIntegerArrayISKList implements IntegerList {
 
     @Override
     public int lastIndex(int i) {
-        return -1;
+        return i;
     }
 
     private void grow() {

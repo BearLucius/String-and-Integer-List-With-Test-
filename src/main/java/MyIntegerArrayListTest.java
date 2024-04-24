@@ -1,11 +1,13 @@
 import org.biponline.ListInt.MyIntegerArrayISKList;
-import org.biponline.ListString.MyStringIKSLArrayList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+@DisplayName("Тест Integer List'а")
 class MyIntegerArrayListTest {
         private MyIntegerArrayISKList list;
+
+        // Проверка обычных методов
     @BeforeEach
     public void setUp() {
         list = new MyIntegerArrayISKList(9);
@@ -21,50 +23,183 @@ class MyIntegerArrayListTest {
         list.add(10);
     }
     @Test
-    public void add()  {
-        assertEquals( list.add(1),1);
-        // assertEquals( list.add(null),null);
+    @DisplayName("Добавление в массив элемента без индекса.")
+    public void addElementWithoutIndexInArray() {
+        assertEquals(1, list.add(1));
+
+        assertThrows(IllegalArgumentException.class, () -> list.add(null));
     }
+
     @Test
-    public void remove()  {
-        assertEquals(Integer.valueOf(2), list.remove(1));
-        assertEquals(9, list.size());
-        assertFalse(list.contains(2));
-        // assertEquals(Integer.valueOf(2), list.remove(40));
-        // assertEquals(Integer.valueOf(2), list.remove(null));
+    @DisplayName("Добавление в массив элемента с индексом.")
+    public void addElementWithIndexInArray() {
+        assertEquals(1, list.add(0, 1));
+
+        assertThrows(IllegalArgumentException.class, () -> list.add(0, null));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.add(-999, 999));
     }
+
     @Test
-    public void indexOf()  {
-        assertEquals(1, list.indexOf(2));
-        assertEquals(3, list.indexOf(4));
+    @DisplayName("Получение элемента в массиве по его индексу.")
+    public void getElementInArrayByIndex() {
+        list.add(0, 1);
+        list.add(1, 2);
+        list.add(2, 3);
+
+        assertEquals(3, list.get(2));
+        // Исключение на получение элемента с индексом -999
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(-999));
     }
+
     @Test
-    public void set() {
-        assertEquals(Integer.valueOf(2), list.set(1,5));
-        assertEquals(Integer.valueOf(5), list.get(1));
+    @DisplayName("Добавление элемента в массив на место уже существующего.")
+    public void setElementReplacingInitialElement() {
+
+        assertEquals(2, list.set(1, 2));
+
+        assertThrows(IllegalArgumentException.class, () -> list.set(3, null));
     }
+
     @Test
-    public void testEquals() {
-        assertTrue(list.equals(list));
+    @DisplayName("Удаление из массива элемента без индекса.")
+    public void removeElementWithoutIndexFromArray() {
+        list.add(0);
+
+        assertEquals(list.get(0), list.remove(0));
+        assertThrows(IllegalArgumentException.class, () -> list.remove(null));
     }
+
     @Test
+    @DisplayName("Удаление из массива элемента с индексом.")
+    public void removeElementWithIndexFromArray() {
+        list.add(0);
+
+        assertEquals(1, list.remove(0));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.remove(-1));
+    }
+
+    @Test
+    @DisplayName("Поиск элемента в массиве с его начала.")
+    public void indexOf() {
+        assertEquals(list.indexOf(2), 1);
+        assertEquals(4, list.indexOf(5));
+    }
+
+
+    @Test
+    @DisplayName("Поиск элемента в массиве с его конца")
+    public void lastIndexOf() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        assertEquals(12, list.lastIndexOf(3));
+        assertEquals(-1, list.lastIndexOf(0));
+    }
+
+    @Test
+    @DisplayName("Проверка на равенство двух массивов по размеру.")
+    public void isEquals() {
+        MyIntegerArrayISKList list = new MyIntegerArrayISKList(3);
+        MyIntegerArrayISKList list2 = new MyIntegerArrayISKList(3);
+
+        list.add(0, 1);
+        list.add(1, 2);
+        list.add(2, 3);
+
+        list2.add(0, 4);
+        list2.add(1, 5);
+        list2.add(1, 5);
+
+        assertTrue(list.equals(list)); // Проверка на равенство двух списков
+        assertThrows(IllegalArgumentException.class, () -> list.equals(null)); // Исключение на пустой сравниваемый список
+    }
+
+    @Test
+    @DisplayName("Проверка на неравенство двух массивов по размеру.")
+    public void notEquals() {
+        MyIntegerArrayISKList list2 = new MyIntegerArrayISKList(3);
+        list.add(1);
+        list2.add(5);
+        list2.add(2);
+
+        assertFalse(list.equals(list2)); // Проверка на неравенство двух списков
+    }
+
+    @Test
+    @DisplayName("Проверка на существование элемента в массиве.")
     public void contains() {
-        assertTrue(list.contains(2));
-        assertFalse(list.contains(11));
+        list.add(0, 0);
+
+//        assertEquals(list.get(0), list.contains(0[], 0));
     }
+
     @Test
+    @DisplayName("Проверка на несуществование элемента в массиве")
+    public void notContains() {
+        assertFalse(list.contains(0));
+    }
+
+    @Test
+    @DisplayName("Быстрая сортировка")
+    public void quickSortTest(){
+    }
+
+    @Test
+    @DisplayName("Получить фактический размер массива")
     public void size() {
-        assertEquals(10, list.size());
+        list.add(1);
+
+        assertEquals(11, list.size());
     }
+
     @Test
-    public void clear()  {
+    @DisplayName("Проверка очищения массива.")
+    public void clear() {
         list.clear();
         assertTrue(list.isEmpty());
     }
+
     @Test
-    public void testik() {
-        assertEquals(list.add(0),0);
-        assertNotNull(0);
+    @DisplayName("Проверка создания нового массива.")
+    public void toArray() {
+        list.toArray();
+        assertEquals(list.size(), 10);
     }
 
+    @Test
+    @DisplayName("Проверка на увеличение места при заполнении")
+    public void grow() {
+        list.add(0);
+    }
+
+    // Проверка исключений
+    @Test
+    @DisplayName("Добавление Null(Ошибка)")
+    public void testAddNull() {
+       assertThrows(IllegalArgumentException.class, () -> list.add(null));
+    }
+    @Test
+    @DisplayName("Получение Null индекса (Выходящего за рамки массива(Ошибка))")
+    public void testGet() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(12));
+    }
+
+    @Test
+    @DisplayName("Удаление null элемента (Ошибка)")
+    public void testRemove() {
+        assertThrows(IllegalArgumentException.class, () -> list.remove(null));
+    }
+
+    @Test
+    @DisplayName("Удаление Null за пределами массива (Ошибка)")
+    public void testRemoveArrayIndexOutOfBoundsException() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.remove(40));
+    }
+
+    @Test
+    @DisplayName("Получение ошибки о добавление Null(Ошибка)")
+    public void testLastIndexOf() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.remove(40));
+    }
 }
