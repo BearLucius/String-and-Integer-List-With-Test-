@@ -2,9 +2,8 @@ import org.biponline.ListString.MyStringIKSLArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
+@DisplayName("Тест String List'а")
 class MyStringArrayListTest {
         private MyStringIKSLArrayList list;
 
@@ -20,7 +19,7 @@ class MyStringArrayListTest {
         @Test
         @DisplayName("Добавление элемента в массив")
         public void testAdd() {
-            list.add(1, "Поставлюсь на индекс 1");
+            list.add("Ы-ы-е");
             assertEquals(6, list.size());
         }
         @Test
